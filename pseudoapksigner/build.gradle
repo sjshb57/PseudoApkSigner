@@ -1,23 +1,14 @@
 apply plugin: 'com.android.library'
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-    }
-}
-
 android {
-    compileSdkVersion 28
+    namespace = "com.aefyr.pseudoapksigner"
+    compileSdk = 36
 
     defaultConfig {
-        minSdkVersion 1
-        targetSdkVersion 28
-        versionCode 7
-        versionName "1.6"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 7
+        versionName = "1.6"
     }
 
     buildTypes {
@@ -25,6 +16,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 }
 
@@ -51,8 +51,3 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-apply from: 'bintray.gradle'
-

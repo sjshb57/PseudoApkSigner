@@ -16,7 +16,7 @@ package com.aefyr.pseudoapksigner;
  * limitations under the License.
  */
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utilities for encoding and decoding the Base64 representation of
@@ -28,6 +28,7 @@ public class Base64 {
     /**
      * Default values for encoder/decoder flags.
      */
+    @SuppressWarnings("unused")
     public static final int DEFAULT = 0;
 
     /**
@@ -77,6 +78,7 @@ public class Base64 {
          * @return true if the input so far is good; false if some
          * error has been detected in the input stream..
          */
+        @SuppressWarnings("unused")
         public abstract boolean process(byte[] input, int offset, int len, boolean finish);
 
         /**
@@ -84,6 +86,7 @@ public class Base64 {
          * could produce for the given number of input bytes.  This may
          * be an overestimate.
          */
+        @SuppressWarnings("unused")
         public abstract int maxOutputSize(int len);
     }
 
@@ -105,6 +108,7 @@ public class Base64 {
      * @throws IllegalArgumentException if the input contains
      *                                  incorrect padding
      */
+    @SuppressWarnings("unused")
     public static byte[] decode(String str, int flags) {
         return decode(str.getBytes(), flags);
     }
@@ -167,7 +171,7 @@ public class Base64 {
          * Lookup table for turning bytes into their position in the
          * Base64 alphabet.
          */
-        private static final int DECODE[] = {
+        private static final int[] DECODE = {
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
@@ -190,7 +194,7 @@ public class Base64 {
          * Decode lookup table for the "web safe" variant (RFC 3548
          * sec. 4) where - and _ replace + and /.
          */
-        private static final int DECODE_WEBSAFE[] = {
+        private static final int[] DECODE_WEBSAFE = {
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1,
@@ -443,12 +447,7 @@ public class Base64 {
      *              adheres to RFC 2045.
      */
     public static String encodeToString(byte[] input, int flags) {
-        try {
-            return new String(encode(input, flags), "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            // US-ASCII is guaranteed to be available.
-            throw new AssertionError(e);
-        }
+        return new String(encode(input, flags), StandardCharsets.US_ASCII);
     }
 
     /**
@@ -463,13 +462,9 @@ public class Base64 {
      *               Passing {@code DEFAULT} results in output that
      *               adheres to RFC 2045.
      */
+    @SuppressWarnings("unused")
     public static String encodeToString(byte[] input, int offset, int len, int flags) {
-        try {
-            return new String(encode(input, offset, len, flags), "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            // US-ASCII is guaranteed to be available.
-            throw new AssertionError(e);
-        }
+        return new String(encode(input, offset, len, flags), StandardCharsets.US_ASCII);
     }
 
     /**
@@ -547,7 +542,7 @@ public class Base64 {
          * Lookup table for turning Base64 alphabet positions (6 bits)
          * into output bytes.
          */
-        private static final byte ENCODE[] = {
+        private static final byte[] ENCODE = {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -558,7 +553,7 @@ public class Base64 {
          * Lookup table for turning Base64 alphabet positions (6 bits)
          * into output bytes.
          */
-        private static final byte ENCODE_WEBSAFE[] = {
+        private static final byte[] ENCODE_WEBSAFE = {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
                 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -625,7 +620,6 @@ public class Base64 {
                                 (input[p++] & 0xff);
                         tailLen = 0;
                     }
-                    ;
                     break;
 
                 case 2:

@@ -31,5 +31,5 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime:2.9.2"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.9.2"
     implementation project(':pseudoapksigner')
-  //  implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }

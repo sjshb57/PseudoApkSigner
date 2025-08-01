@@ -26,6 +26,7 @@ public class ZipAlignZipOutputStream extends ZipOutputStream {
         mAlignment = alignment;
     }
 
+    @SuppressWarnings("unused")
     public int getAlignment() {
         return mAlignment;
     }
@@ -45,7 +46,7 @@ public class ZipAlignZipOutputStream extends ZipOutputStream {
 
     private static class BytesCounterOutputStream extends OutputStream {
 
-        private OutputStream mWrappedOutputStream;
+        private final OutputStream mWrappedOutputStream;
         private long mBytesWritten = 0;
 
         private BytesCounterOutputStream(OutputStream outputStream) {

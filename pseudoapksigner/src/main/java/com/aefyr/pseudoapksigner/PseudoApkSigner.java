@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.interfaces.RSAPrivateKey;
@@ -15,8 +16,8 @@ public class PseudoApkSigner {
     private static final String[] META_INF_FILES_TO_SKIP_ENDINGS = new String[]{"manifest.mf", ".sf", ".rsa", ".dsa", ".ec"};
     private static final String HASHING_ALGORITHM = "SHA1";
 
-    private RSAPrivateKey mPrivateKey;
-    private File mTemplateFile;
+    private final RSAPrivateKey mPrivateKey;
+    private final File mTemplateFile;
 
     private String mSignerName = "CERT";
 
@@ -81,16 +82,16 @@ public class PseudoApkSigner {
         }
 
         zipOutputStream.putNextEntry(new ZipEntry("META-INF/MANIFEST.MF"));
-        zipOutputStream.write(manifest.build().getBytes(Constants.UTF8));
+        zipOutputStream.write(manifest.build().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
 
         zipOutputStream.putNextEntry(new ZipEntry(String.format("META-INF/%s.SF", mSignerName)));
-        zipOutputStream.write(signature.generate().getBytes(Constants.UTF8));
+        zipOutputStream.write(signature.generate().getBytes(StandardCharsets.UTF_8));
         zipOutputStream.closeEntry();
 
         zipOutputStream.putNextEntry(new ZipEntry(String.format("META-INF/%s.RSA", mSignerName)));
         zipOutputStream.write(Utils.readFile(mTemplateFile));
-        zipOutputStream.write(Utils.sign(HASHING_ALGORITHM, mPrivateKey, signature.generate().getBytes(Constants.UTF8)));
+        zipOutputStream.write(Utils.sign(HASHING_ALGORITHM, mPrivateKey, signature.generate().getBytes(StandardCharsets.UTF_8)));
         zipOutputStream.closeEntry();
 
         apkZipInputStream.close();

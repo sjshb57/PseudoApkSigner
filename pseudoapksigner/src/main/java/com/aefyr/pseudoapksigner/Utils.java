@@ -14,6 +14,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 public class Utils {
 
+    @SuppressWarnings("unused")
     public static byte[] getFileHash(File file, String hashingAlgorithm) throws Exception {
         return getFileHash(new FileInputStream(file), hashingAlgorithm);
     }

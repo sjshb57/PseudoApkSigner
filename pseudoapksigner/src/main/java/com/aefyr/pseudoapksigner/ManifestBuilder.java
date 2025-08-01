@@ -1,12 +1,14 @@
 package com.aefyr.pseudoapksigner;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 class ManifestBuilder {
 
-    private ArrayList<ManifestEntry> mEntries;
+    private final ArrayList<ManifestEntry> mEntries;
 
     private long mVersion = 0;
     private String mCachedManifest;
@@ -22,7 +24,7 @@ class ManifestBuilder {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(generateHeader().toString());
+        stringBuilder.append(generateHeader());
         for (ManifestEntry entry : mEntries) {
             stringBuilder.append(entry.toString());
         }
@@ -41,7 +43,7 @@ class ManifestBuilder {
     }
 
     static class ManifestEntry {
-        private LinkedHashMap<String, String> mAttributes;
+        private final LinkedHashMap<String, String> mAttributes;
 
         ManifestEntry() {
             mAttributes = new LinkedHashMap<>();
@@ -55,6 +57,7 @@ class ManifestBuilder {
             return mAttributes.get(attribute);
         }
 
+        @NonNull
         @Override
         public String toString() {
             StringBuilder stringBuilder = new StringBuilder();

@@ -21,9 +21,9 @@ public class PseudoApkSignerWrapper {
     @SuppressLint("StaticFieldLeak")// a p p l i c a t i o n   c o n t e x t
     private static PseudoApkSignerWrapper sInstance;
 
-    private Context mContext;
-    private Executor mExecutor = Executors.newSingleThreadExecutor();
-    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Context mContext;
+    private final Executor mExecutor = Executors.newSingleThreadExecutor();
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private PseudoApkSigner mPseudoApkSigner;
 
     public static PseudoApkSignerWrapper getInstance(Context c) {

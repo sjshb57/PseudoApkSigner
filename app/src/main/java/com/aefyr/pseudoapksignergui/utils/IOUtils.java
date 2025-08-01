@@ -19,6 +19,7 @@ public class IOUtils {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void copyFile(File original, File destination) throws IOException {
         FileInputStream inputStream = new FileInputStream(original);
         FileOutputStream outputStream = new FileOutputStream(destination);

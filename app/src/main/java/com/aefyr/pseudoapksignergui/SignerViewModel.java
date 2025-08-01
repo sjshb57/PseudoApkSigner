@@ -17,14 +17,14 @@ public class SignerViewModel extends AndroidViewModel implements PseudoApkSigner
     public static final String EVENT_SIGNING_SUCCEED = "signing_succeed";
     public static final String EVENT_SIGNING_FAILED = "signing_failed";
 
-    private Context mContext;
+    private final Context mContext;
 
     public enum State {
         IDLE, SIGNING
     }
 
-    private MutableLiveData<State> mState = new MutableLiveData<>();
-    private MutableLiveData<Event<String[]>> mEvents = new MutableLiveData<>();
+    private final MutableLiveData<State> mState = new MutableLiveData<>();
+    private final MutableLiveData<Event<String[]>> mEvents = new MutableLiveData<>();
 
 
     public SignerViewModel(@NonNull Application application) {

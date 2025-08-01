@@ -17,7 +17,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity implements FilePickerDialogFragment.OnFilesSelectedListener {
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements FilePickerDialogF
 
         mSignButton.setOnClickListener((v) -> checkPermissionsAndPickFiles());
 
-        mSignerViewModel = ViewModelProviders.of(this).get(SignerViewModel.class);
+        mSignerViewModel = new ViewModelProvider(this).get(SignerViewModel.class);
         mSignerViewModel.getState().observe(this, (state) -> {
             switch (state) {
                 case IDLE:

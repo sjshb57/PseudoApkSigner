@@ -14,4 +14,7 @@
     <string name="signer_apk_signed_desc">Signed APK was saved as %s</string>
     <string name="signer_install">Install</string>
 
+    <string name="title_default">Alert</string>
+    <string name="message_default">Message</string>
+
 </resources>

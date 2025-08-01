@@ -37,7 +37,7 @@ public class FilePickerDialogFragment extends DialogFragment {
 
     private String mTag;
     private String mTitle = "Select files";
-    private DialogProperties mDialogProperties = new DialogProperties();
+    private final DialogProperties mDialogProperties = new DialogProperties();
 
     public static FilePickerDialogFragment newInstance(String tag, String title, DialogProperties properties) {
         FilePickerDialogFragment fragment = new FilePickerDialogFragment();

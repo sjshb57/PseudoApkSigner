@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import com.aefyr.pseudoapksignergui.R;
 
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -33,16 +31,21 @@ public class SimpleAlertDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        if (args == null)
+        if (args == null) {
             return;
+        }
 
-        mTitle = args.getCharSequence(ARG_TITLE, "title");
-        mMessage = args.getCharSequence(ARG_MESSAGE, "message");
+        mTitle = args.getCharSequence(ARG_TITLE, getString(R.string.title_default));
+        mMessage = args.getCharSequence(ARG_MESSAGE, getString(R.string.message_default));
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new AlertDialog.Builder(Objects.requireNonNull(getContext())).setTitle(mTitle).setMessage(mMessage).setPositiveButton(R.string.ok, null).create();
+        return new AlertDialog.Builder(requireContext())
+                .setTitle(mTitle)
+                .setMessage(mMessage)
+                .setPositiveButton(R.string.ok, null)
+                .create();
     }
 }

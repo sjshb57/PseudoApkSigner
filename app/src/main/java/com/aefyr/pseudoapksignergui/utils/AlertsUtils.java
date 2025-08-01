@@ -16,6 +16,7 @@ public class AlertsUtils {
         SimpleAlertDialogFragment.newInstance(title, message).show(a.getSupportFragmentManager(), "dialog_alert");
     }
 
+    @SuppressWarnings("unused")
     public static void showAlert(Fragment f, @StringRes int title, @StringRes int message) {
         showAlert(f, f.getText(title), f.getText(message));
     }
